@@ -9,7 +9,7 @@ enum COW_STATE {IDLE, WALK}
 @onready var sprite = $Sprite2D
 @onready var timer = $Timer
 
-var walk_time = 5
+var walk_time = 2
 var idle_time = 2
 
 var move_direction = Vector2.RIGHT
@@ -22,12 +22,14 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if current_state == COW_STATE.WALK:
 		velocity = move_direction * move_speed
+	else:
+		velocity = Vector2.ZERO
 	move_and_slide()
 
 func select_new_direction():
 	move_direction = Vector2(
-		randi_range(-1, 1),
-		randi_range(-1, 1)
+		randi_range(0, 1) * 2 - 1,
+		randi_range(0, 1) * 2 - 1
 	)
 	if move_direction.x < 0:
 		sprite.flip_h = true
