@@ -195,6 +195,7 @@ sources/1 = SubResource("TileSetAtlasSource_4d7sh")
 sources/2 = SubResource("TileSetAtlasSource_ir8iy")
 
 [node name="Node2D" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Player Cat" parent="." instance=ExtResource("1_wtcfe")]
 
