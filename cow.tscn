@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://qwrwghkhijd"]
+[gd_scene load_steps=14 format=3 uid="uid://qwrwghkhijd"]
 
 [ext_resource type="Texture2D" uid="uid://cfub611ax54a6" path="res://art/Character/Free Cow Sprites.png" id="1_nuh3y"]
 [ext_resource type="Script" uid="uid://xxdkrqa6dit5" path="res://cow.gd" id="1_yj05v"]
@@ -79,6 +79,9 @@ states/walk/node = SubResource("AnimationNodeAnimation_yj05v")
 states/walk/position = Vector2(516.5, 91)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_m1w7b"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_y5k1g"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_uaxjc")]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yj05v"]
+size = Vector2(20, 5)
+
 [node name="cow" type="CharacterBody2D"]
 script = ExtResource("1_yj05v")
 
@@ -97,5 +100,9 @@ tree_root = SubResource("AnimationNodeStateMachine_jbpbs")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_yj05v")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

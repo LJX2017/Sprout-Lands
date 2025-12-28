@@ -7,6 +7,9 @@
 
 [node name="Player Cat" parent="." instance=ExtResource("1_wtcfe")]
 
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player Cat"]
+remote_path = NodePath("../../Camera2D")
+
 [node name="cow" parent="." instance=ExtResource("2_0e48y")]
 position = Vector2(17, 50)
 
@@ -15,3 +18,5 @@ position = Vector2(30, 24)
 
 [node name="cow3" parent="." instance=ExtResource("2_0e48y")]
 position = Vector2(71, 37)
+
+[node name="Camera2D" type="Camera2D" parent="."]
