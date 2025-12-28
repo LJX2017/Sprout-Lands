@@ -2,23 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://cfub611ax54a6" path="res://art/Character/Free Cow Sprites.png" id="1_nuh3y"]
 
-[sub_resource type="Animation" id="Animation_nuh3y"]
-resource_name = "walk"
-length = 0.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.19999999, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-
 [sub_resource type="Animation" id="Animation_yj05v"]
 length = 0.001
 tracks/0/type = "value"
@@ -34,8 +17,25 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_m1w7b"]
+[sub_resource type="Animation" id="Animation_nuh3y"]
 resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_m1w7b"]
+resource_name = "walk"
 length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -54,29 +54,29 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m1w7b"]
 _data = {
 &"RESET": SubResource("Animation_yj05v"),
-&"idle": SubResource("Animation_m1w7b"),
-&"walk": SubResource("Animation_nuh3y")
+&"idle": SubResource("Animation_nuh3y"),
+&"walk": SubResource("Animation_m1w7b")
 }
 
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_y5k1g"]
-min_space = Vector2(-1, -1.1)
-max_space = Vector2(1, 1.1)
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nuh3y"]
+animation = &"idle"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_uaxjc"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yj05v"]
+animation = &"walk"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tc63g"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m1w7b"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jhu8x"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y5k1g"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_363vg"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uaxjc"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_jbpbs"]
-states/idle/node = SubResource("AnimationNodeBlendSpace2D_y5k1g")
-states/idle/position = Vector2(377.5, 98)
-states/walk/node = SubResource("AnimationNodeBlendSpace2D_uaxjc")
-states/walk/position = Vector2(546, 96.5)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_tc63g"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_jhu8x"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_363vg")]
+states/idle/node = SubResource("AnimationNodeAnimation_nuh3y")
+states/idle/position = Vector2(356.5, 83.5)
+states/walk/node = SubResource("AnimationNodeAnimation_yj05v")
+states/walk/position = Vector2(516.5, 91)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_m1w7b"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_y5k1g"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_uaxjc")]
 
 [node name="cow" type="CharacterBody2D"]
 
@@ -93,5 +93,3 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_jbpbs")
 anim_player = NodePath("../AnimationPlayer")
-parameters/idle/blend_position = Vector2(-0.2798165, -0.057220697)
-parameters/walk/blend_position = Vector2(0, 0)
