@@ -7,8 +7,12 @@ enum COW_STATE {IDLE, WALK}
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
 @onready var sprite = $Sprite2D
+@onready var timer = $Timer
 
-var move_direction
+var walk_time = 5
+var idle_time = 2
+
+var move_direction = Vector2.RIGHT
 var current_state = COW_STATE.IDLE
 
 func _ready():
@@ -16,10 +20,8 @@ func _ready():
 	pick_new_state()
 
 func _physics_process(delta: float) -> void:
-	var direction: Vector2 = Vector2.RIGHT
-	
-	velocity = direction * move_speed
-	pick_new_state()
+	if current_state == COW_STATE.WALK:
+		velocity = move_direction * move_speed
 	move_and_slide()
 
 func select_new_direction():
@@ -27,12 +29,22 @@ func select_new_direction():
 		randi_range(-1, 1),
 		randi_range(-1, 1)
 	)
+	if move_direction.x < 0:
+		sprite.flip_h = true
+	elif move_direction.x > 0:
+		sprite.flip_h = false
 
 func pick_new_state():
 	if current_state == COW_STATE.IDLE:
 		current_state = COW_STATE.WALK
 		state_machine.travel("walk")
 		select_new_direction()
+		timer.start(walk_time)
 	else:
 		current_state = COW_STATE.IDLE
 		state_machine.travel("idle")
+		timer.start(idle_time)
+
+
+func _on_timer_timeout() -> void:
+	pick_new_state()

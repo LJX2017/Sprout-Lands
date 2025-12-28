@@ -8,4 +8,10 @@
 [node name="Player Cat" parent="." instance=ExtResource("1_wtcfe")]
 
 [node name="cow" parent="." instance=ExtResource("2_0e48y")]
-position = Vector2(-11, 36)
+position = Vector2(17, 50)
+
+[node name="cow2" parent="." instance=ExtResource("2_0e48y")]
+position = Vector2(30, 24)
+
+[node name="cow3" parent="." instance=ExtResource("2_0e48y")]
+position = Vector2(71, 37)
