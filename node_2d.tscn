@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfqsqsfh5ha1t"]
+[gd_scene load_steps=3 format=3 uid="uid://cfqsqsfh5ha1t"]
 
 [ext_resource type="PackedScene" uid="uid://b2nc4bibc8bop" path="res://player_cat.tscn" id="1_wtcfe"]
+[ext_resource type="PackedScene" uid="uid://qwrwghkhijd" path="res://cow.tscn" id="2_0e48y"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Player Cat" parent="." instance=ExtResource("1_wtcfe")]
+
+[node name="cow" parent="." instance=ExtResource("2_0e48y")]
+position = Vector2(-11, 36)
